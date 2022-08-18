@@ -49,3 +49,18 @@ export const Title = styled.p`
   margin-left: 16px;
   color: #00687f;
 `;
+
+export const Details = styled.div`
+  background-color: #ffffff;
+  width: 60.83vw;
+  height: 300px;
+`;
+
+export const PlanetRow = styled.table`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 60.83vw;
+  box-shadow: 0px 2px 1px rgba(196, 196, 196, 0.2);
+`;

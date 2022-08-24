@@ -1,34 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import Film from "./Film";
 
-interface FilmTypes {
+interface FilmProps {
   id: string;
   title: string;
-  planetConnection: PlanetsArray;
+  planetConnection: AssignedPlanets;
 }
 
-interface PlanetsArray {
-  planets: Array<PlanetTypes>;
+interface AssignedPlanets {
+  planets: PlanetProps[];
 }
 
-interface PlanetTypes {
+interface PlanetProps {
   id: string;
   name: string;
   diameter: number;
   rotationPeriod: number;
   orbitalPeriod: number;
   population: number;
-  climates: string | string[];
+  climates: string[];
   surfaceWater: number;
 }
-
 const FilmList: React.FunctionComponent<{
-  films: FilmTypes[];
+  films: FilmProps[];
 }> = ({ films }) => {
   return (
     <>
       {films?.map((film) => (
-        <Film title={film.title} planets={film.planetConnection.planets}></Film>
+        <Film
+          title={film.title}
+          planets={film.planetConnection.planets}
+          key={film.id}
+        ></Film>
       ))}
     </>
   );

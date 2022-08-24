@@ -4,14 +4,21 @@ import { gql } from "graphql-request";
 import { client } from "../graphql/client";
 import FilmList from "./FilmList";
 import { Background, Logo } from "./Style";
+import Loader from "../images/loading.gif";
+import LogoImg from "../images/logo.svg";
 
 export const Main: React.FunctionComponent = () => {
-  const { data } = useFilms();
+  const { data, isFetching } = useFilms();
 
   return (
     <Background>
-      <Logo src={require("../images/logo.svg").default} alt="Logo"></Logo>
-      <FilmList films={data}></FilmList>
+      <Logo src={LogoImg} alt="Logo"></Logo>
+
+      {!isFetching ? (
+        <FilmList films={data}></FilmList>
+      ) : (
+        <img src={Loader} alt="loader" style={{ margin: "40px" }} />
+      )}
     </Background>
   );
 };
@@ -46,6 +53,6 @@ function useFilms() {
       );
       return data.allFilms.films;
     },
-    { enabled: true }
+    { enabled: true, refetchOnWindowFocus: false }
   );
 }
